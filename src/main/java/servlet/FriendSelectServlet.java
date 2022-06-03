@@ -11,21 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/friend")
-public class FriendServlet extends HttpServlet {
+@WebServlet("/friend/selectByQQ")
+public class FriendSelectServlet extends HttpServlet {
 
-    private static final Logger logger= LoggerFactory.getLogger(UserServlet.class);
+    private static final Logger logger= LoggerFactory.getLogger(FriendSelectServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String type=request.getParameter("type");
-        logger.info("type={}",type);
-
+        selectUserByQQ(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     /**

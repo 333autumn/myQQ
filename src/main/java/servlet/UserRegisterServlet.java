@@ -12,25 +12,17 @@ import javax.servlet.annotation.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
-
-    private static final Logger logger= LoggerFactory.getLogger(UserServlet.class);
-
+@WebServlet("/user/register")
+public class UserRegisterServlet extends HttpServlet {
+    private static final Logger logger= LoggerFactory.getLogger(UserRegisterServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String type=request.getParameter("type");
-        logger.info("type={}",type);
-        if (type.equals("register")){
-            register(request,response);
-        }else if (type.equals("login")){
-            login(request,response);
-        }
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        register(request,response);
     }
 
     /**
@@ -58,24 +50,4 @@ public class UserServlet extends HttpServlet {
             response.getWriter().write("用户注册失败");
         }
     }
-
-    /**
-     * 用户登录
-     */
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        //获取传入数据
-        String qq=request.getParameter("qq");
-        String password=request.getParameter("password");
-        logger.info("qq:{},password:{}",qq,password);
-        //判断密码是否正确
-        boolean flag = UserService.login(qq, password);
-        response.setContentType("text/json;charset=utf-8");
-        if (flag){
-            response.getWriter().write("用户登录成功");
-        }else {
-            response.getWriter().write("用户登录失败");
-        }
-    }
-
-
 }
