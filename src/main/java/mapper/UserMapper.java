@@ -1,5 +1,6 @@
 package mapper;
 
+import com.alibaba.fastjson.JSON;
 import eneity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,4 +49,22 @@ public class UserMapper {
         }
         return true;
     }
+
+    /**
+     * 根据qq模糊查询用户信息
+     */
+    public static List<User> selectByQQLike(String qq) {
+        String sql = "select * from user where qq like '%" + qq + "%'";
+        Statement statement = dbUtils.getStatement();
+        logger.info("模糊查询用户信息执行的sql为:{}", sql);
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<User> users = jdbcUtils.ResultSetToBean(resultSet, User.class);
+            logger.info("模糊查询用户结果:{}", JSON.toJSON(users).toString());
+            return users;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

@@ -1,30 +1,34 @@
 package eneity;
 
-import java.sql.Timestamp;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class User {
     private String username;
     private String gender;
     private Integer age;
-    private Timestamp createDate;
-    private Timestamp updatedDate;
-    private Integer loginfold;
+    private LocalDateTime createDate;
+    private LocalDateTime updatedDate;
+    private Integer loginInfoId;
     private String qq;
     private String password;
     private String avatar;
     private String email;
     private String signature;
 
+
     public User() {
     }
 
-    public User(String username, String gender, Integer age, Timestamp createDate, Timestamp updatedDate, Integer loginfold, String qq, String password, String avatar, String email, String signature) {
+    public User(String username, String gender, Integer age, LocalDateTime createDate, LocalDateTime updatedDate,
+                Integer loginInfoId, String qq, String password, String avatar, String email, String signature) {
         this.username = username;
         this.gender = gender;
         this.age = age;
         this.createDate = createDate;
         this.updatedDate = updatedDate;
-        this.loginfold = loginfold;
+        this.loginInfoId = loginInfoId;
         this.qq = qq;
         this.password = password;
         this.avatar = avatar;
@@ -56,28 +60,28 @@ public class User {
         this.age = age;
     }
 
-    public Timestamp getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public Timestamp getUpdatedDate() {
+    public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(Timestamp updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 
-    public Integer getLoginfold() {
-        return loginfold;
+    public Integer getLoginInfoId() {
+        return loginInfoId;
     }
 
-    public void setLoginfold(Integer loginfold) {
-        this.loginfold = loginfold;
+    public void setLoginInfoId(Integer loginInfoId) {
+        this.loginInfoId = loginInfoId;
     }
 
     public String getQq() {
@@ -127,7 +131,7 @@ public class User {
                 ", age=" + age +
                 ", createDate=" + createDate +
                 ", updatedDate=" + updatedDate +
-                ", loginfold=" + loginfold +
+                ", loginInfoId=" + loginInfoId +
                 ", qq='" + qq + '\'' +
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * 获取数据库连接的工具类
+ * 数据库连接工具类
  */
 public class dbUtils {
 
@@ -14,7 +14,7 @@ public class dbUtils {
      * 定义连接参数
      */
     //mysql连接地址
-    private static final String url = "jdbc:mysql://localhost:3306/qq";
+    private static final String url = "jdbc:mysql://localhost:3306/qq?useSSL=false&serverTimezone=UTC";
     //mysql用户名
     private static final String user = "root";
     //mysql密码
@@ -28,6 +28,7 @@ public class dbUtils {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("注册数据库驱动失败");
         }
         Connection connection=null;
