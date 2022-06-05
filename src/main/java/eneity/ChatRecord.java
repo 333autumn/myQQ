@@ -48,16 +48,16 @@ public class ChatRecord {
         this.id = id;
     }
 
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
+    public String getUpdatedDate() {
+        return updatedDate.toString();
     }
 
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        return createdDate.toString();
     }
 
     public void setCreatedDate(LocalDateTime createdDate) {
@@ -88,7 +88,7 @@ public class ChatRecord {
         this.chatContent = chatContent;
     }
 
-    public String getSql() {
+    public String sql() {
         return
                 " updateDate=" + updatedDate +
                 ", createDate=" + createdDate +

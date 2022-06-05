@@ -39,7 +39,7 @@ public class UserMapper {
      * 新增用户
      */
     public static boolean addUser(User user) {
-        String sql="insert into user values ("+user.getSql()+")";
+        String sql="insert into user values ("+user.sql()+")";
         Statement statement=dbUtils.getStatement();
         logger.info("新增用户执行的sql为:{}",sql);
         try {

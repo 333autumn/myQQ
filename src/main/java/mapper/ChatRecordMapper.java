@@ -27,7 +27,7 @@ public class ChatRecordMapper {
         try {
             ResultSet resultSet1 = statement.executeQuery(sql1);
             List<ChatRecord> records1=jdbcUtils.ResultSetToBean(resultSet1,ChatRecord.class);
-            logger.info("查询聊天记录结果为:{}", JSON.toJSONString(records1));
+            logger.info("查询聊天记录结果为:{}", JSON.toJSON(records1).toString());
             list.addAll(records1);
         } catch (Exception e) {
             return null;
@@ -39,7 +39,7 @@ public class ChatRecordMapper {
      * 新增一条聊天记录
      */
     public static void addChatRecords(ChatRecord chatRecord){
-        String sql="insert into chat_record values ("+chatRecord.getSql()+")";
+        String sql="insert into chat_record values ("+chatRecord.sql()+")";
         logger.info("新增聊天记录执行的sql为:"+sql);
         Statement statement=dbUtils.getStatement();
         try {

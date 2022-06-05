@@ -2,7 +2,6 @@ package eneity;
 
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class User {
     private String username;
@@ -60,16 +59,16 @@ public class User {
         this.age = age;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public String getCreateDate() {
+        return createDate.toString();
     }
 
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
+    public String getUpdatedDate() {
+        return updatedDate.toString();
     }
 
     public void setUpdatedDate(LocalDateTime updatedDate) {
@@ -124,7 +123,7 @@ public class User {
         this.signature = signature;
     }
 
-    public String getSql() {
+    public String sql() {
         return
                 "username='" + username + '\'' +
                 ", gender=" + gender +

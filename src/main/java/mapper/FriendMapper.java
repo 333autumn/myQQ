@@ -30,7 +30,7 @@ public class FriendMapper {
         friend.setGroupingId(0);
         friend.setSelfQQ(selfQQ);
         friend.setFriendQQ(friendQQ);
-        String sql="insert into friend values ("+friend.getSql()+")";
+        String sql="insert into friend values ("+friend.sql()+")";
         Statement statement= dbUtils.getStatement();
         logger.info("添加好友执行的sql为:{}",sql);
         try {

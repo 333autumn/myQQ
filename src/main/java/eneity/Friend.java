@@ -37,8 +37,8 @@ public class Friend {
         isAlive = alive;
     }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        return createdDate.toString();
     }
 
     public void setCreatedDate(LocalDate createdDate) {
@@ -69,7 +69,7 @@ public class Friend {
         this.friendQQ = friendQQ;
     }
 
-    public String getSql() {
+    public String sql() {
         return
                 "isAlive=" + isAlive +
                 ", createdDate=" + createdDate +

@@ -28,6 +28,7 @@ public class jdbcUtils {
                     Method setField = beanClass.getMethod
                             ("set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1), field.getType());
                     // 利用MySQL数据库不区分大小写的性质获取对应字段的值
+//                    System.out.println(setField.getName()+"-----"+ resultSet.getObject(fieldName.toUpperCase()));
                     setField.invoke(object, resultSet.getObject(fieldName.toUpperCase()));
                 }
                 beanList.add(object);
