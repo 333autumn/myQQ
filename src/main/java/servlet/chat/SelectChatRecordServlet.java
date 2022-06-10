@@ -1,4 +1,4 @@
-package servlet;
+package servlet.chat;
 
 import com.alibaba.fastjson.JSON;
 import eneity.ChatRecord;

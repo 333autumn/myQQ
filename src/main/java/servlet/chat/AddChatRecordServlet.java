@@ -1,8 +1,7 @@
-package servlet;
+package servlet.chat;
 
 import com.alibaba.fastjson.JSON;
 import eneity.ChatRecord;
-import eneity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ChatRecordService;

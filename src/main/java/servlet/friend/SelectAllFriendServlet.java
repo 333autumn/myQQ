@@ -1,4 +1,4 @@
-package servlet;
+package servlet.friend;
 
 import com.alibaba.fastjson.JSON;
 import eneity.User;

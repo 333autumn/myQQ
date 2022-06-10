@@ -1,4 +1,4 @@
-package servlet;
+package servlet.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,6 @@ import utils.StringUtils;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.xml.ws.Response;
 import java.io.IOException;
 
 @WebServlet("/user/login")
