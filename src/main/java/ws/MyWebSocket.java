@@ -24,7 +24,8 @@ public class MyWebSocket {
     private static final Logger logger= LoggerFactory.getLogger(MyWebSocket.class);
 
     //ConcurrentHashMap是线程安全的哈希表
-    //键值为qq号
+    //键为qq号
+    //值为当前websocket会话
     private static final Map<String, MyWebSocket> users =new ConcurrentHashMap<>();
     //用于保存当前会话
     private Session session;

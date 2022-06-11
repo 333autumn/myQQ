@@ -33,5 +33,19 @@ public class GroupingMapper {
      * 更改好友分组
      */
 
+    public static boolean changeGrouping(String selfQQ, String friendQQ, int groupingId) {
+        logger.info("selfQQ:{},friendQQ:{},groupingId:{}",selfQQ,friendQQ,groupingId);
+        String sql="update friend set groupingId='"+groupingId+"' where selfQQ='"+selfQQ+"' and friendQQ='"+friendQQ+"'";
+        Statement statement=dbUtils.getStatement();
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            logger.error("更改好友分组失败");
+            return false;
+        }
+        logger.info("更改好友分组成功");
+        return true;
+    }
+
 
 }

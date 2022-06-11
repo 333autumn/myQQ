@@ -19,4 +19,14 @@ public class GroupingService {
         grouping.setUserQQ(userQQ);
         return GroupingMapper.addGrouping(grouping);
     }
+
+    /**
+     * 更改好友分组
+     * @param selfQQ 本人qq
+     * @param friendQQ 好友qq
+     * @param groupingId 分组id
+     */
+    public static boolean changeGrouping(String selfQQ, String friendQQ, int groupingId) {
+        return GroupingMapper.changeGrouping(selfQQ,friendQQ,groupingId);
+    }
 }
