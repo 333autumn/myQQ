@@ -3,6 +3,7 @@ package servlet.friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.FriendService;
+import utils.ResponseResult;
 import utils.ResponseUtils;
 import utils.StringUtils;
 
@@ -27,21 +28,21 @@ public class AddFriendServlet extends HttpServlet {
     /**
      * 添加好友
      */
+    //http://localhost:8888/myQQ/friend/addFriend?selfQQ=111&friendQQ=9059851382
     private void addFriend(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //获取传入参数
         String selfQQ=request.getParameter("selfQQ");
         String friendQQ=request.getParameter("friendQQ");
-        logger.info("本人qq:{},好友qq:{}",selfQQ,friendQQ);
         if (StringUtils.isEmpty(selfQQ)||StringUtils.isEmpty(friendQQ)){
-            logger.info("新增好友传入参数为空");
-            ResponseUtils.writeObject(response,"传入参数为空");
+            ResponseUtils.writeObject(response, ResponseResult.error("传入参数为空"));
         }
+        logger.info("本人qq:{},好友qq:{}",selfQQ,friendQQ);
         if (FriendService.addFriend(selfQQ,friendQQ)){
             logger.info("新增好友成功");
-            ResponseUtils.writeObject(response,"新增好友成功");
+            ResponseUtils.writeObject(response,ResponseResult.ok("新增好友成功"));
         }else {
             logger.info("新增好友失败");
-            ResponseUtils.writeObject(response,"新增好友失败");
+            ResponseUtils.writeObject(response,ResponseResult.error("新增好友失败"));
         }
     }
 }

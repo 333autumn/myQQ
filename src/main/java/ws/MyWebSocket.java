@@ -34,6 +34,7 @@ public class MyWebSocket {
 
     /**
      * 建立连接时调用
+     * 相当于用户登录
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("qq") String qq,@PathParam("password") String password){

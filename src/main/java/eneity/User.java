@@ -2,37 +2,26 @@ package eneity;
 
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class User {
     private String username;
-    private String gender;
-    private Integer age;
-    private LocalDateTime createDate;
-    private LocalDateTime updatedDate;
-    private Integer loginInfoId;
     private String qq;
     private String password;
-    private String avatar;
-    private String email;
-    private String signature;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createDate;
 
 
     public User() {
     }
 
-    public User(String username, String gender, Integer age, LocalDateTime createDate, LocalDateTime updatedDate,
-                Integer loginInfoId, String qq, String password, String avatar, String email, String signature) {
+    public User(String username, String qq, String password) {
         this.username = username;
-        this.gender = gender;
-        this.age = age;
-        this.createDate = createDate;
-        this.updatedDate = updatedDate;
-        this.loginInfoId = loginInfoId;
         this.qq = qq;
         this.password = password;
-        this.avatar = avatar;
-        this.email = email;
-        this.signature = signature;
     }
 
     public String getUsername() {
@@ -43,45 +32,6 @@ public class User {
         this.username = username;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getCreateDate() {
-        return createDate.toString();
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getUpdatedDate() {
-        return updatedDate.toString();
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public Integer getLoginInfoId() {
-        return loginInfoId;
-    }
-
-    public void setLoginInfoId(Integer loginInfoId) {
-        this.loginInfoId = loginInfoId;
-    }
 
     public String getQq() {
         return qq;
@@ -99,42 +49,24 @@ public class User {
         this.password = password;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public String time(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00").format(createDate);
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
     public String sql() {
         return
                 "username='" + username + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", createDate=" + createDate +
-                ", updatedDate=" + updatedDate +
-                ", loginInfoId=" + loginInfoId +
                 ", qq='" + qq + '\'' +
                 ", password='" + password + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", email='" + email + '\'' +
-                ", signature='" + signature + '\'' ;
+                ", createDate='" + time() +"'";
     }
+
 }

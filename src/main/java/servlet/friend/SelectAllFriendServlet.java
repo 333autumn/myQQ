@@ -5,6 +5,7 @@ import eneity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.FriendService;
+import utils.ResponseResult;
 import utils.ResponseUtils;
 import utils.StringUtils;
 
@@ -36,11 +37,11 @@ public class SelectAllFriendServlet extends HttpServlet {
     private void selectAllFriend(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取参数
         String selfQQ = request.getParameter("selfQQ");
-        logger.info("selfQQ:{}", selfQQ);
         if (StringUtils.isEmpty(selfQQ)) {
-            ResponseUtils.writeObject(response, "传入参数为空");
+            ResponseUtils.writeObject(response, ResponseResult.error("传入参数为空"));
         }
+        logger.info("selfQQ:{}", selfQQ);
         List<User> friends = FriendService.selectAllFriend(selfQQ);
-        ResponseUtils.writeObject(response, JSON.toJSONString(friends));
+        ResponseUtils.writeObject(response, ResponseResult.ok(friends));
     }
 }

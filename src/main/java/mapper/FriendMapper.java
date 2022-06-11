@@ -25,17 +25,16 @@ public class FriendMapper {
         //得到现在的时间
         LocalDate now=LocalDate.now();
         Friend friend=new Friend();
-        friend.setAlive(true);
         friend.setCreatedDate(now);
-        friend.setGroupingId(0);
         friend.setSelfQQ(selfQQ);
         friend.setFriendQQ(friendQQ);
-        String sql="insert into friend values ("+friend.sql()+")";
+        String sql="insert into friend set "+friend.sql();
         Statement statement= dbUtils.getStatement();
         logger.info("添加好友执行的sql为:{}",sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

@@ -1,22 +1,19 @@
 package eneity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Friend {
     private int id;      //主键
-    private boolean isAlive;        //是否存在
     private LocalDate createdDate;    //创建日期
-    private int groupingId;       //分组id
     private String selfQQ;      //自己的qq
     private String friendQQ;       //好友的qq
 
     public Friend() {
     }
 
-    public Friend( boolean isAlive, LocalDate createdDate, int groupingId, String selfQQ, String friendQQ) {
-        this.isAlive = isAlive;
+    public Friend(  LocalDate createdDate, String selfQQ, String friendQQ) {
         this.createdDate = createdDate;
-        this.groupingId = groupingId;
         this.selfQQ = selfQQ;
         this.friendQQ = friendQQ;
     }
@@ -29,13 +26,6 @@ public class Friend {
         this.id = id;
     }
 
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
 
     public String getCreatedDate() {
         return createdDate.toString();
@@ -45,13 +35,6 @@ public class Friend {
         this.createdDate = createdDate;
     }
 
-    public int getGroupingId() {
-        return groupingId;
-    }
-
-    public void setGroupingId(int groupingId) {
-        this.groupingId = groupingId;
-    }
 
     public String getSelfQQ() {
         return selfQQ;
@@ -69,12 +52,14 @@ public class Friend {
         this.friendQQ = friendQQ;
     }
 
+    public String time(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00").format(createdDate);
+    }
+
     public String sql() {
         return
-                "isAlive=" + isAlive +
-                ", createdDate=" + createdDate +
-                ", groupingId=" + groupingId +
-                ", selfQQ='" + selfQQ + '\'' +
+                "createdDate='" + time() +
+                "', selfQQ='" + selfQQ + '\'' +
                 ", friendQQ='" + friendQQ + '\'';
     }
 }

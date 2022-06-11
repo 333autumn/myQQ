@@ -27,6 +27,7 @@ public class ChatRecordMapper {
         try {
             ResultSet resultSet1 = statement.executeQuery(sql1);
             List<ChatRecord> records1=jdbcUtils.ResultSetToBean(resultSet1,ChatRecord.class);
+
             logger.info("查询聊天记录结果为:{}", JSON.toJSON(records1).toString());
             list.addAll(records1);
         } catch (Exception e) {

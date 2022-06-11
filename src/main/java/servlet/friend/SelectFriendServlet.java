@@ -6,6 +6,7 @@ import eneity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.FriendService;
+import utils.ResponseResult;
 import utils.ResponseUtils;
 import utils.StringUtils;
 
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/friend/selectByQQ")
+@WebServlet("/friend/selectByContent")
 public class SelectFriendServlet extends HttpServlet {
 
     private static final Logger logger= LoggerFactory.getLogger(SelectFriendServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        selectUserByQQ(request,response);
+        selectUserByContent(request,response);
     }
 
     @Override
@@ -33,18 +34,18 @@ public class SelectFriendServlet extends HttpServlet {
     }
 
     /**
-     * 通过qq号查询用户信息(模糊查询)
+     * 通过qq或者username查询用户信息(模糊查询)
      */
-    //http://localhost:8888/myQQ/friend/selectByQQ?qq=111
-    private void selectUserByQQ(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+    //http://localhost:8888/myQQ/friend/selectByContent?content=111
+    private void selectUserByContent(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
         //获取传入参数
-        String qq=request.getParameter("qq");
-        logger.info("qq:{}",qq);
-        if (StringUtils.isEmpty(qq)){
-            ResponseUtils.writeObject(response,"传入的qq为空");
+        String content=request.getParameter("content");
+        if (StringUtils.isEmpty(content)){
+            ResponseUtils.writeObject(response, ResponseResult.error("传入参数为空"));
         }
-        //通过qq模糊查询用户信息
-        List<User> users = FriendService.selectFriendsByQQ(qq);
+        logger.info("content:{}",content);
+        //通过qq或者username模糊查询用户信息
+        List<User> users = FriendService.selectFriendsByContent(content);
         //返回信息
         ResponseUtils.writeObject(response, JSON.toJSONString(users));
     }

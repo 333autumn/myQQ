@@ -7,10 +7,7 @@ public class ChatRecord {
      * 主键
      */
     private int id;
-    /**
-     * 更新日期
-     */
-    private LocalDateTime updatedDate;
+
     /**
      * 创建日期
      */
@@ -32,8 +29,7 @@ public class ChatRecord {
     public ChatRecord() {
     }
 
-    public ChatRecord( LocalDateTime updatedDate, LocalDateTime createdDate, String senderQq, String receiverQq, String chatContent) {
-        this.updatedDate = updatedDate;
+    public ChatRecord( LocalDateTime createdDate, String senderQq, String receiverQq, String chatContent) {
         this.createdDate = createdDate;
         this.senderQq = senderQq;
         this.receiverQq = receiverQq;
@@ -48,13 +44,6 @@ public class ChatRecord {
         this.id = id;
     }
 
-    public String getUpdatedDate() {
-        return updatedDate.toString();
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
 
     public String getCreatedDate() {
         return createdDate.toString();
@@ -90,10 +79,9 @@ public class ChatRecord {
 
     public String sql() {
         return
-                " updateDate=" + updatedDate +
                 ", createDate=" + createdDate +
-                ", senderQq='" + senderQq + '\'' +
-                ", receiverQq='" + receiverQq + '\'' +
-                ", chatContent='" + chatContent + '\'';
+                        ", senderQq='" + senderQq + '\'' +
+                        ", receiverQq='" + receiverQq + '\'' +
+                        ", chatContent='" + chatContent + '\'';
     }
 }

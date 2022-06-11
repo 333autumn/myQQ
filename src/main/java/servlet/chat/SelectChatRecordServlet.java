@@ -5,6 +5,7 @@ import eneity.ChatRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ChatRecordService;
+import utils.ResponseResult;
 import utils.ResponseUtils;
 import utils.StringUtils;
 
@@ -36,13 +37,13 @@ public class SelectChatRecordServlet extends HttpServlet {
         //获取传入参数
         String senderQQ = request.getParameter("senderQQ");
         String receiverQQ = request.getParameter("receiverQQ");
-        logger.info("发送人qq:{},接收人qq:{}", senderQQ, receiverQQ);
         if (StringUtils.isEmpty(senderQQ) || StringUtils.isEmpty(receiverQQ)) {
             logger.info("查看聊天记录传入参数为空");
-            ResponseUtils.writeObject(response, "传入参数为空");
+            ResponseUtils.writeObject(response, ResponseResult.error("传入参数为空"));
         }
+        logger.info("发送人qq:{},接收人qq:{}", senderQQ, receiverQQ);
         List<ChatRecord> records = ChatRecordService.selectRecords(senderQQ, receiverQQ);
-        ResponseUtils.writeObject(response, JSON.toJSONString(records));
+        ResponseUtils.writeObject(response, ResponseResult.ok(records));
     }
 
 }

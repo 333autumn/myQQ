@@ -4,17 +4,21 @@ import eneity.User;
 import mapper.FriendMapper;
 import mapper.UserMapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FriendService {
 
     /**
      * 通过qq号模糊查询用户信息
      */
-    public static List<User> selectFriendsByQQ(String qq){
-        List<User> users = UserMapper.selectByQQLike(qq);
-        return users;
+    public static List<User> selectFriendsByContent(String content){
+        List<User> users1 = UserMapper.selectByQQLike(content);
+        List<User> users2= UserMapper.selectByUserNameLike(content);
+        List<User> list=new ArrayList<>();
+        list.addAll(users1);
+        list.addAll(users2);
+        return list;
     }
 
     /**
@@ -22,11 +26,7 @@ public class FriendService {
      */
     public static boolean addFriend(String selfQQ,String friendQQ){
         //判断两个用户是否存在
-        User self=new User();
-        self.setQq(selfQQ);
-        User friend=new User();
-        friend.setQq(friendQQ);
-        if (!UserService.isAlive(self)||!UserService.isAlive(friend)){
+        if (!UserService.isAlive(selfQQ)||!UserService.isAlive(friendQQ)){
             return false;
         }
         return FriendMapper.addFriend(selfQQ,friendQQ);

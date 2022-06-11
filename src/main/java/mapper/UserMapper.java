@@ -39,16 +39,37 @@ public class UserMapper {
      * 新增用户
      */
     public static boolean addUser(User user) {
-        String sql="insert into user values ("+user.sql()+")";
+        String sql="insert into user set "+user.sql();
         Statement statement=dbUtils.getStatement();
         logger.info("新增用户执行的sql为:{}",sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
     }
+
+
+    /**
+     * 根据qq号查询用户信息
+     */
+    public static User getUserInfo(String qq) {
+        String sql="select * from user where qq ='"+qq+"'";
+        Statement statement = dbUtils.getStatement();
+        logger.info("查询用户信息执行的sql为:{}", sql);
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<User> users = jdbcUtils.ResultSetToBean(resultSet, User.class);
+            logger.info("查询用户结果:{}", JSON.toJSON(users).toString());
+            return users.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     /**
      * 根据qq模糊查询用户信息
@@ -56,15 +77,32 @@ public class UserMapper {
     public static List<User> selectByQQLike(String qq) {
         String sql = "select * from user where qq like '%" + qq + "%'";
         Statement statement = dbUtils.getStatement();
-        logger.info("模糊查询用户信息执行的sql为:{}", sql);
+        logger.info("根据qq模糊查询用户信息执行的sql为:{}", sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             List<User> users = jdbcUtils.ResultSetToBean(resultSet, User.class);
-            logger.info("模糊查询用户结果:{}", JSON.toJSON(users).toString());
+            logger.info("根据qq模糊查询用户结果:{}", JSON.toJSON(users).toString());
             return users;
         } catch (Exception e) {
             return null;
         }
     }
 
+    /**
+     * 根据username模糊查询用户信息
+     */
+
+    public static List<User> selectByUserNameLike(String username) {
+        String sql = "select * from user where username like '%" + username + "%'";
+        Statement statement = dbUtils.getStatement();
+        logger.info("根据username模糊查询用户信息执行的sql为:{}", sql);
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<User> users = jdbcUtils.ResultSetToBean(resultSet, User.class);
+            logger.info("根据username模糊查询用户结果:{}", JSON.toJSON(users).toString());
+            return users;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
