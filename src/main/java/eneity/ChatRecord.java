@@ -1,6 +1,7 @@
 package eneity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ChatRecord {
     /**
@@ -77,9 +78,13 @@ public class ChatRecord {
         this.chatContent = chatContent;
     }
 
+    public String time(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00").format(createdDate);
+    }
+
     public String sql() {
         return
-                ", createDate=" + createdDate +
+                ", createDate=" + time() +
                         ", senderQq='" + senderQq + '\'' +
                         ", receiverQq='" + receiverQq + '\'' +
                         ", chatContent='" + chatContent + '\'';

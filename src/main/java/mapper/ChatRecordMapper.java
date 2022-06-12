@@ -40,7 +40,7 @@ public class ChatRecordMapper {
      * 新增一条聊天记录
      */
     public static void addChatRecords(ChatRecord chatRecord){
-        String sql="insert into chat_record values ("+chatRecord.sql()+")";
+        String sql="insert into chat_record set "+chatRecord.sql();
         logger.info("新增聊天记录执行的sql为:"+sql);
         Statement statement=dbUtils.getStatement();
         try {

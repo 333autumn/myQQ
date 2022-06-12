@@ -6,7 +6,6 @@ import eneity.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ChatRecordService;
-import service.UserService;
 import utils.StringUtils;
 
 import javax.websocket.*;
@@ -17,8 +16,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ServerEndpoint(value = "/chat/{qq}/{password}")
-//ws://localhost:8888/myQQ/chat/111/123
+@ServerEndpoint(value = "/chat/{qq}")
+//ws://localhost:8888/myQQ/chat/111
 public class MyWebSocket {
 
     private static final Logger logger= LoggerFactory.getLogger(MyWebSocket.class);
@@ -37,24 +36,18 @@ public class MyWebSocket {
      * 相当于用户登录
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("qq") String qq,@PathParam("password") String password){
-        logger.info("登录qq:{},登录密码:{}",qq,password);
-        if (StringUtils.isEmpty(qq)||StringUtils.isEmpty(password)){
+    public void onOpen(Session session, @PathParam("qq") String qq) {
+        logger.info("登录qq:{}", qq);
+        if (StringUtils.isEmpty(qq)) {
             logger.info("参数为空,登录失败");
             return;
         }
-        //判断密码是否正确
-       if (!UserService.login(qq, password)){
-           logger.info("密码错误,登录失败");
-           return;
-       }
-        logger.info("密码正确,登录成功");
-       //密码正确,成功登录,保存当前会话
-        this.qq=qq;
+        //成功登录,保存当前会话
+        this.qq = qq;
         //保存当前会话
-        this.session=session;
+        this.session = session;
         //将qq和当前对象加入到容器中
-        users.put(this.qq,this);
+        users.put(this.qq, this);
     }
 
     /**
