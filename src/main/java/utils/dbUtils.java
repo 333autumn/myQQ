@@ -20,10 +20,16 @@ public class dbUtils {
     //mysql密码
     private static final String password = "123456";
 
+    //数据库连接单例模式
+    private static Connection connection;
+
     /**
      * 获取数据库连接
      */
     public static Connection getConnection(){
+        if (connection!=null){
+            return connection;
+        }
         //注册数据库驱动
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

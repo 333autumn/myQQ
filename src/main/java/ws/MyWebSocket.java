@@ -82,6 +82,16 @@ public class MyWebSocket {
         chatRecord.setCreatedDate(LocalDateTime.now());
         //保存聊天记录
         ChatRecordService.addChatRecords(chatRecord);
+        logger.info("保存信息成功,信息内容:{}",info);
+//        //群发消息
+//        List<MyWebSocket> list= new ArrayList<>(users.values());
+//        for (MyWebSocket socket : list) {
+//            try {
+//                socket.session.getBasicRemote().sendText(message);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @OnClose

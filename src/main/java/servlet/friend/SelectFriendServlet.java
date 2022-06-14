@@ -1,7 +1,5 @@
 package servlet.friend;
 
-
-import com.alibaba.fastjson.JSON;
 import eneity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +45,6 @@ public class SelectFriendServlet extends HttpServlet {
         //通过qq或者username模糊查询用户信息
         List<User> users = FriendService.selectFriendsByContent(content);
         //返回信息
-        ResponseUtils.writeObject(response, JSON.toJSONString(users));
+        ResponseUtils.writeObject(response,ResponseResult.ok(users));
     }
 }
