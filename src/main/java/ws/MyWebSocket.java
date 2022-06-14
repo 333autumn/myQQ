@@ -42,6 +42,10 @@ public class MyWebSocket {
             logger.info("参数为空,登录失败");
             return;
         }
+        if (users.containsKey(qq)){
+            logger.info("用户已登录");
+            return;
+        }
         //成功登录,保存当前会话
         this.qq = qq;
         //保存当前会话
@@ -108,4 +112,3 @@ public class MyWebSocket {
     }
 
 }
-
