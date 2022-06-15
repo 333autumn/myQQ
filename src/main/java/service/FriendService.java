@@ -29,7 +29,11 @@ public class FriendService {
         if (!UserService.isAlive(selfQQ)||!UserService.isAlive(friendQQ)){
             return false;
         }
-        return FriendMapper.addFriend(selfQQ,friendQQ);
+        //判断两个用户是否已经为好友
+        if (FriendMapper.isFriend(selfQQ,friendQQ)&&FriendMapper.isFriend(friendQQ,selfQQ)){
+            return false;
+        }
+        return FriendMapper.addFriend(selfQQ,friendQQ)&&FriendMapper.addFriend(friendQQ,selfQQ);
     }
 
     /**

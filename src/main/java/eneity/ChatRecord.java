@@ -79,13 +79,13 @@ public class ChatRecord {
     }
 
     public String time(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00").format(createdDate);
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(createdDate);
     }
 
     public String sql() {
         return
-                ", createDate=" + time() +
-                        ", senderQq='" + senderQq + '\'' +
+                "createdDate='" + time() +
+                        "', senderQq='" + senderQq + '\'' +
                         ", receiverQq='" + receiverQq + '\'' +
                         ", chatContent='" + chatContent + '\'';
     }

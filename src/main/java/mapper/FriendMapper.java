@@ -56,4 +56,24 @@ public class FriendMapper {
         }
         return friends;
     }
+
+    /**
+     * 判断两个用户是否已经为好友
+     */
+    public static boolean isFriend(String selfQQ, String friendQQ) {
+        String sql = "select * from friend where selfQQ='"+selfQQ+"' and friendQQ='"+friendQQ+"'";
+        Statement statement = dbUtils.getStatement();
+        logger.info("判断两个用户是否为好友执行的sql为:{}",sql);
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<User> users = jdbcUtils.ResultSetToBean(resultSet, User.class);
+            if (users.size()==0){
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
+        return true;
+    }
 }

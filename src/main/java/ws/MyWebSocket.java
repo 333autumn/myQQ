@@ -1,8 +1,10 @@
 package ws;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import eneity.ChatRecord;
 import eneity.Message;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ChatRecordService;
@@ -64,6 +66,8 @@ public class MyWebSocket {
             return;
         }
         //获取传入参数
+        //将json字符串解析为java对象
+        message= StringEscapeUtils.unescapeJava(message);
         Message m= JSON.parseObject(message,Message.class);
         String receiverQq=m.getReceiverQq();
         logger.info("receiverQq:{}",receiverQq);
@@ -72,7 +76,7 @@ public class MyWebSocket {
         //判断接收人是否在线
         if (users.get(receiverQq)!=null){
             try {
-                users.get(receiverQq).session.getBasicRemote().sendText(info);
+                users.get(receiverQq).session.getBasicRemote().sendText(qq+","+info);
             } catch (IOException e) {
                 e.printStackTrace();
                 logger.error("发生错误,信息发送失败");
