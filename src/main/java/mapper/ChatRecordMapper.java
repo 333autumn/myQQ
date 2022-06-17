@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.*;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +22,13 @@ public class ChatRecordMapper {
      */
     public static List<ChatRecord> selectRecords(String senderQQ, String receiverQQ){
         String sql1="select * from chat_record where senderQq='"+senderQQ+"'and receiverQq='"+receiverQQ+"'";
-        Statement statement=dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("查询聊天记录执行的sql为:{}",sql1);
         List<ChatRecord> list=new ArrayList<>();
         try {
@@ -32,6 +39,19 @@ public class ChatRecordMapper {
             list.addAll(records1);
         } catch (Exception e) {
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }
@@ -42,11 +62,30 @@ public class ChatRecordMapper {
     public static void addChatRecords(ChatRecord chatRecord){
         String sql="insert into chat_record set "+chatRecord.sql();
         logger.info("新增聊天记录执行的sql为:"+sql);
-        Statement statement=dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             logger.info("新增聊天记录发生错误");
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

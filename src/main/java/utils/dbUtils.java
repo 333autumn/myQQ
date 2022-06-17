@@ -20,43 +20,26 @@ public class dbUtils {
     //mysql密码
     private static final String password = "123456";
 
-    //数据库连接单例模式
-    private static Connection connection;
-
     /**
      * 获取数据库连接
      */
-    public static Connection getConnection(){
-        if (connection!=null){
-            return connection;
-        }
+    public static Connection getConnection() {
         //注册数据库驱动
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("注册数据库驱动失败");
         }
-        Connection connection=null;
+        Connection connection = null;
         try {
-            connection= DriverManager.getConnection(url,user,password);
+            connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("获取数据库连接失败");
         }
         return connection;
     }
 
-    /**
-     * 获取Statement
-     */
-    public static Statement getStatement(){
-        Statement statement=null;
-        try {
-            statement=getConnection().createStatement();
-        } catch (Exception e) {
-            System.out.println("获取Statement失败");
-        }
-        return statement;
-    }
 
 }

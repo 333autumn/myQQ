@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.dbUtils;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,13 +30,32 @@ public class FriendMapper {
         friend.setSelfQQ(selfQQ);
         friend.setFriendQQ(friendQQ);
         String sql="insert into friend set "+friend.sql();
-        Statement statement= dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("添加好友执行的sql为:{}",sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -45,7 +65,13 @@ public class FriendMapper {
      */
     public static List<User> selectFriendsInfo(String selfQQ) {
         String sql = "select * from user where qq in ( select friendQQ from friend  where selfQQ=" + selfQQ + ")";
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         List<User> friends;
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -53,6 +79,19 @@ public class FriendMapper {
             logger.info("查询好友结果为:{}", JSON.toJSONString(friends));
         } catch (Exception e) {
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return friends;
     }
@@ -62,7 +101,13 @@ public class FriendMapper {
      */
     public static boolean isFriend(String selfQQ, String friendQQ) {
         String sql = "select * from friend where selfQQ='"+selfQQ+"' and friendQQ='"+friendQQ+"'";
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("判断两个用户是否为好友执行的sql为:{}",sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -73,6 +118,19 @@ public class FriendMapper {
         } catch (Exception e) {
             e.printStackTrace();
             return true;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }

@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint(value = "/chat/{qq}")
-//ws://localhost:8888/myQQ/chat/111
+//ws://localhost:8080/myQQ/chat/111
 public class MyWebSocket {
 
     private static final Logger logger= LoggerFactory.getLogger(MyWebSocket.class);
@@ -65,6 +65,7 @@ public class MyWebSocket {
             logger.info("发送消息传入参数为空,发送消息失败");
             return;
         }
+        logger.info("当前登录qq==>{}",qq);
         //获取传入参数
         //将json字符串解析为java对象
         message= StringEscapeUtils.unescapeJava(message);

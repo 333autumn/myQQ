@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import utils.dbUtils;
 import utils.jdbcUtils;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +22,13 @@ public class UserMapper {
      */
     public static User selectByQQ(String qq) {
         String sql = "select * from user where qq=" + qq;
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("查询用户信息执行的sql为:{}",sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -31,6 +38,19 @@ public class UserMapper {
             }
         } catch (Exception e) {
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -40,13 +60,32 @@ public class UserMapper {
      */
     public static boolean addUser(User user) {
         String sql="insert into user set "+user.sql();
-        Statement statement=dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("新增用户执行的sql为:{}",sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -57,7 +96,13 @@ public class UserMapper {
      */
     public static User getUserInfo(String qq) {
         String sql="select * from user where qq ='"+qq+"'";
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("查询用户信息执行的sql为:{}", sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -67,6 +112,19 @@ public class UserMapper {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -76,7 +134,13 @@ public class UserMapper {
      */
     public static List<User> selectByQQLike(String qq) {
         String sql = "select * from user where qq like '%" + qq + "%'";
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("根据qq模糊查询用户信息执行的sql为:{}", sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -85,6 +149,19 @@ public class UserMapper {
             return users;
         } catch (Exception e) {
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -94,7 +171,13 @@ public class UserMapper {
 
     public static List<User> selectByUserNameLike(String username) {
         String sql = "select * from user where username like '%" + username + "%'";
-        Statement statement = dbUtils.getStatement();
+        Connection connection=dbUtils.getConnection();
+        Statement statement= null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("根据username模糊查询用户信息执行的sql为:{}", sql);
         try {
             ResultSet resultSet = statement.executeQuery(sql);
@@ -103,6 +186,19 @@ public class UserMapper {
             return users;
         } catch (Exception e) {
             return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
