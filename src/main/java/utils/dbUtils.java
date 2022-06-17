@@ -18,7 +18,7 @@ public class dbUtils {
     //mysql用户名
     private static final String user = "root";
     //mysql密码
-    private static final String password = "123456";
+    private static final String password = "root";
 
     /**
      * 获取数据库连接

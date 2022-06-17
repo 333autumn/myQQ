@@ -1,7 +1,7 @@
 package service;
 
 import eneity.ChatRecord;
-import mapper.ChatRecordMapper;
+import dao.ChatRecordDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ public class ChatRecordService {
      * 搜索两个用户间的所有聊天记录
      */
     public static List<ChatRecord> selectRecords(String senderQQ, String receiverQQ){
-        List<ChatRecord> records1 = ChatRecordMapper.selectRecords(senderQQ, receiverQQ);
-        List<ChatRecord> records2 = ChatRecordMapper.selectRecords(receiverQQ, senderQQ);
+        List<ChatRecord> records1 = ChatRecordDao.selectRecords(senderQQ, receiverQQ);
+        List<ChatRecord> records2 = ChatRecordDao.selectRecords(receiverQQ, senderQQ);
         List<ChatRecord> list=new ArrayList<>();
         if (Objects.nonNull(records1)){
             list.addAll(records1);
@@ -27,7 +27,7 @@ public class ChatRecordService {
      * 新增聊天记录
      */
     public static void addChatRecords(ChatRecord chatRecord){
-        ChatRecordMapper.addChatRecords(chatRecord);
+        ChatRecordDao.addChatRecords(chatRecord);
     }
 
 }

@@ -1,4 +1,4 @@
-package mapper;
+package dao;
 
 import com.alibaba.fastjson.JSON;
 import eneity.ChatRecord;
@@ -13,9 +13,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatRecordMapper {
+public class ChatRecordDao {
 
-    private static final Logger logger= LoggerFactory.getLogger(ChatRecordMapper.class);
+    private static final Logger logger= LoggerFactory.getLogger(ChatRecordDao.class);
 
     /**
      * 查询两个用户间的聊天记录id

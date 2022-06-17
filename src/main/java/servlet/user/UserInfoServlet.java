@@ -28,7 +28,7 @@ public class UserInfoServlet extends HttpServlet {
     /**
      * 通过qq号获取用户信息
      */
-    //http://localhost:8888/myQQ/user/info?qq=111
+    //http://localhost:8080/myQQ/user/info?qq=111
     private void getUserInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //获取传入参数
         String qq=request.getParameter("qq");

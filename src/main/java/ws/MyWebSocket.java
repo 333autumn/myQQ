@@ -15,6 +15,8 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,13 +44,11 @@ public class MyWebSocket {
         logger.info("登录qq:{}", qq);
         if (StringUtils.isEmpty(qq)) {
             logger.info("参数为空,登录失败");
-            return;
         }
         if (users.containsKey(qq)){
             logger.info("用户已登录");
-            return;
         }
-        //成功登录,保存当前会话
+        //成功登录,保存当前qq
         this.qq = qq;
         //保存当前会话
         this.session = session;
@@ -92,6 +92,7 @@ public class MyWebSocket {
         //保存聊天记录
         ChatRecordService.addChatRecords(chatRecord);
         logger.info("保存信息成功,信息内容:{}",info);
+        logger.info("qq==>{}",qq);
 //        //群发消息
 //        List<MyWebSocket> list= new ArrayList<>(users.values());
 //        for (MyWebSocket socket : list) {

@@ -1,4 +1,4 @@
-package mapper;
+package dao;
 
 import com.alibaba.fastjson.JSON;
 import eneity.Friend;
@@ -15,9 +15,9 @@ import java.time.LocalDate;
 import utils.jdbcUtils;
 import java.util.List;
 
-public class FriendMapper {
+public class FriendDao {
 
-    private static final Logger logger= LoggerFactory.getLogger(FriendMapper.class);
+    private static final Logger logger= LoggerFactory.getLogger(FriendDao.class);
 
     /**
      * 添加好友

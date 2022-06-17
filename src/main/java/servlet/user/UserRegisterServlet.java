@@ -1,8 +1,6 @@
 package servlet.user;
 
-import com.alibaba.fastjson.JSON;
 import eneity.User;
-import mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.UserService;
@@ -13,7 +11,6 @@ import utils.StringUtils;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 @WebServlet("/user/register")

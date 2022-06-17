@@ -1,7 +1,7 @@
 package service;
 
 import eneity.User;
-import mapper.UserMapper;
+import dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.StringUtils;
@@ -15,7 +15,7 @@ public class UserService {
      * 查询用户是否存在
      */
     public static boolean isAlive(String qq){
-        User select= UserMapper.selectByQQ(qq);
+        User select= UserDao.selectByQQ(qq);
         return select != null;
     }
 
@@ -23,7 +23,7 @@ public class UserService {
      * 新增用户
      */
     public static boolean addUser(User user){
-        return UserMapper.addUser(user);
+        return UserDao.addUser(user);
     }
 
     /**
@@ -35,7 +35,7 @@ public class UserService {
         if (!isAlive(qq)){
             return false;
         }
-        User select=UserMapper.selectByQQ(qq);
+        User select= UserDao.selectByQQ(qq);
         if (select==null){
             return false;
         }
@@ -46,7 +46,7 @@ public class UserService {
      * 根据qq号查询用户信息
      */
     public static User getUserInfo(String qq){
-        return UserMapper.getUserInfo(qq);
+        return UserDao.getUserInfo(qq);
     }
 
     /**
@@ -64,7 +64,7 @@ public class UserService {
         user.setPassword(password);
         user.setQq(qq);
         user.setCreateDate(LocalDateTime.now());
-        if (UserMapper.addUser(user)){
+        if (UserDao.addUser(user)){
             return qq;
         }
         return null;

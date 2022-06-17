@@ -1,4 +1,4 @@
-package mapper;
+package dao;
 
 import com.alibaba.fastjson.JSON;
 import eneity.User;
@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class UserMapper {
+public class UserDao {
 
-    private static final Logger logger= LoggerFactory.getLogger(UserMapper.class);
+    private static final Logger logger= LoggerFactory.getLogger(UserDao.class);
 
     /**
      * 根据qq查询用户信息
